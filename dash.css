@@ -1,0 +1,257 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background: #f5f7fa;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2b7bbb;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-right a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.nav-right a:hover {
+    color: #2b7bbb;
+}
+
+/* Profile container */
+.profile-menu {
+    position: relative;
+}
+
+/* Icon */
+.profile-icon {
+    position: relative;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* 🔥 Active dot */
+.status-dot {
+    position: absolute;
+    bottom: -2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background: #00ff88;
+    border-radius: 50%;
+    display: none;
+    box-shadow: 0 0 8px #00ff88;
+}
+
+/* Glow animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 5px #00ff88; }
+    50% { box-shadow: 0 0 15px #00ff88; }
+    100% { box-shadow: 0 0 5px #00ff88; }
+}
+
+.status-dot.active {
+    display: block;
+    animation: pulse 1.5s infinite;
+}
+
+/* Dropdown */
+.dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    
+    transition: 0.3s ease;
+    min-width: 130px;
+}
+
+/* Links */
+.dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown a:hover {
+    background: #f0f0f0;
+}
+
+/* 🔥 Show when hovering ANYWHERE inside menu */
+.profile-menu:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+    background: linear-gradient(to bottom, #eaf4fb, #d6e9f7);
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    margin: auto;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+}
+
+.search-box button {
+    padding: 12px 20px;
+    border: none;
+    background: #2b7bbb;
+    color: white;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #1f5f91;
+}
+
+/* Fields Section */
+.fields {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.fields h2 {
+    margin-bottom: 30px;
+}
+
+/* Grid Layout */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Card */
+.card {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+/* Icon */
+.card-content {
+    font-size: 30px;
+}
+
+.card-content p {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Buttons */
+.card-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card-buttons button {
+    padding: 8px 14px;
+    border: none;
+    background: #2b7bbb;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.card-buttons button:hover {
+    background: #1f5f91;
+}
+
+/* Hover effect */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    .search-box input {
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    .search-box button {
+        border-radius: 8px;
+    }
+}
