@@ -14,12 +14,17 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">💡 Quiz Master</div>
+        <div class="logo">💡 EduQuiz Explorer</div>
 
         <div class="nav-right">
-            <a href="#">About</a>
+    <a href="about.html">About</a>
 
-          <div class="profile-menu">
+    <!-- ✅ ADD HERE -->
+    <button class="review-nav-btn" onclick="window.location.href='review.html?field=Machine Learning'">
+    ⭐ Review
+</button>
+
+    <div class="profile-menu">
     <div class="profile-icon" id="profileIcon">
         👤
         <span class="status-dot" id="statusDot"></span>
@@ -31,18 +36,29 @@
     </div>
 </div>
         </div>
+
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Find Your Learning Journey</h1>
-        <p>Explore roadmaps in any field</p>
 
-        <div class="search-box">
-            <input type="text" placeholder="e.g. Machine Learning, Data Science...">
-            <button>Generate Roadmap</button>
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>🚀 Level Up Your Skills</h1>
+            <p>Take quizzes, follow roadmaps, and master your dream field</p>
+
+            <div class="search-wrapper">
+                <input id="searchInput" type="text" placeholder="Search fields like Data Science..." />
+                <button onclick="searchField()">🔍</button>
+            </div>
         </div>
-    </section>
+
+        <div class="hero-image">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="quiz">
+        </div>
+    </div>
+
+</section>
 
     <!-- Fields Section -->
     <section class="fields">
@@ -82,104 +98,148 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-content">🔐<p>Cyber Security</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('Cyber Security')">Roadmap</button>
-                    <button onclick="startQuiz('Cyber Security')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">📱<p>App Development</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('App Development')">Roadmap</button>
-                    <button onclick="startQuiz('App Development')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">🎮<p>Game Development</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('Game Development')">Roadmap</button>
-                    <button onclick="startQuiz('Game Development')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">☁️<p>Cloud Computing</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('Cloud Computing')">Roadmap</button>
-                    <button onclick="startQuiz('Cloud Computing')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">📊<p>Data Analytics</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('Data Analytics')">Roadmap</button>
-                    <button onclick="startQuiz('Data Analytics')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">🧠<p>Artificial Intelligence</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('Artificial Intelligence')">Roadmap</button>
-                    <button onclick="startQuiz('Artificial Intelligence')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">🔧<p>DevOps</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('DevOps')">Roadmap</button>
-                    <button onclick="startQuiz('DevOps')">Start Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content">🌐<p>Networking</p></div>
-                <div class="card-buttons">
-                    <button onclick="goToRoadmap('Networking')">Roadmap</button>
-                    <button onclick="startQuiz('Networking')">Start Quiz</button>
-                </div>
-            </div>
+            
 
         </div>
     </section>
 
+
+
+
+
+    
+    </section>
+    <footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-brand">
+      <h2>💡 EduQuiz Explorer</h2>
+      <p>Learn, practice and grow your skills with structured roadmaps and quizzes.</p>
+    </div>
+
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="dash.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="review.html">Reviews</a>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>📧 support@eduquiz.com</p>
+      <p>🌐 www.eduquiz.com</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 EduQuiz Explorer • Built with ❤️
+  </div>
+
+</footer>
+
     <!-- JS -->
-    <script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyCHgbiqtDlQU1IogjiZueOehovU9x-F8xk",
+  authDomain: "quiz-8198a.firebaseapp.com",
+  projectId: "quiz-8198a",
+  storageBucket: "quiz-8198a.firebasestorage.app",
+  messagingSenderId: "495360395071",
+  appId: "1:495360395071:web:afc7c2492ddcb5bbd3758a"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const statusDot = document.getElementById("statusDot");
+const dropdown = document.getElementById("dropdown");
+
+// 🔥 FIX LOGIN CHECK
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        statusDot.style.display = "block";
+
+        dropdown.innerHTML = `
+            <a href="profile.html">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        `;
+    } else {
+        statusDot.style.display = "none";
+    }
+});
+
+// LOGOUT
+window.logout = async function(){
+    await signOut(auth);
+    window.location.reload();
+};
+
+</script>
+<script>
+
+// 🔥 ALL FIELDS
+const fields = [
+    "Machine Learning",
+    "Web Development",
+    "Software Engineering",
+    "Data Science",
+    "Cyber Security",
+    "App Development",
+    "Game Development",
+    "Cloud Computing",
+    "Data Analytics",
+    "Artificial Intelligence",
+    "DevOps",
+    "Networking"
+];
+
+// 🔥 SEARCH
+function searchField(){
+    const input = document.getElementById("searchInput").value
+        .toLowerCase()
+        .replace(/\s/g,"");
+
+    const match = fields.find(f =>
+        f.toLowerCase().replace(/\s/g,"").includes(input)
+    );
+
+    if(match){
+        window.location.href = "result.html?field=" + encodeURIComponent(match);
+    } else {
+        alert("Field not found 😢");
+    }
+}
+
+// ENTER KEY SUPPORT
+document.getElementById("searchInput").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        searchField();
+    }
+});
+
+// ROADMAP
 function goToRoadmap(field){
     window.location.href = "roadmap.html?field=" + encodeURIComponent(field);
 }
 
+// QUIZ
 function startQuiz(field){
-    window.open("quiz.html?field=" + encodeURIComponent(field), "_blank");
+    window.location.href = "quiz.html?field=" + encodeURIComponent(field);
 }
+
 </script>
-<script>
-const user = localStorage.getItem("user");
-const statusDot = document.getElementById("statusDot");
-const dropdown = document.getElementById("dropdown");
 
-if(user){
-    // show glowing dot
-    statusDot.classList.add("active");
 
-    // update dropdown
-    dropdown.innerHTML = `
-        <a href="#">My Profile</a>
-        <a href="#" onclick="logout()">Logout</a>
-    `;
-}
 
-function logout(){
-    localStorage.removeItem("user");
-    window.location.reload();
-}
-</script>
+
 
 
 </body>
