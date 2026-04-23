@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Result</title>
+
+<style>
+
+/* 🔥 GLOBAL */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+}
+
+/* 🔥 HERO */
+.hero {
+    text-align: center;
+    padding: 80px 20px 40px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    opacity: 0.7;
+}
+
+/* 🔥 GLASS CARD */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    backdrop-filter: blur(20px);
+}
+
+/* 🔥 TAGS */
+.tags {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 8px 14px;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 12px;
+    backdrop-filter: blur(10px);
+}
+
+/* 🔥 ROADMAP TIMELINE */
+.timeline {
+    position: relative;
+    margin: 40px 0;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: rgba(255,255,255,0.2);
+    transform: translateX(-50%);
+}
+
+/* STEP */
+.step {
+    width: 45%;
+    padding: 20px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    position: relative;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* left/right alternate */
+.step:nth-child(odd) {
+    left: 0;
+}
+
+.step:nth-child(even) {
+    left: 55%;
+}
+
+/* glow hover */
+.step:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.15);
+}
+
+/* 🔥 BUTTONS */
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* roadmap */
+.roadmap-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+/* quiz */
+.quiz-btn {
+    background: linear-gradient(135deg, #00ff87, #60efff);
+    color: black;
+}
+
+/* hover glow */
+button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* 🔥 ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <h1 id="title"></h1>
+    <p>🚀 Smart roadmap + instant quiz system</p>
+</div>
+
+<div class="container">
+
+    <div id="tags" class="tags"></div>
+
+    <div class="timeline" id="timeline"></div>
+
+    <div class="buttons">
+        <button class="roadmap-btn" onclick="openRoadmap()">🚀 Full Roadmap</button>
+        <button class="quiz-btn" onclick="startQuiz()">⚡ Quick Quiz</button>
+    </div>
+
+</div>
+
+<script>
+
+// FIELD
+const params = new URLSearchParams(window.location.search);
+const field = params.get("field") || "Machine Learning";
+document.getElementById("title").innerText = field;
+
+// 🔥 DATA
+const data = {
+
+"Machine Learning": {
+    steps: ["Python", "Math", "ML Models", "Projects"],
+    tags: ["AI", "TensorFlow", "Data"]
+},
+
+"Web Development": {
+    steps: ["HTML", "CSS", "JavaScript", "React"],
+    tags: ["Frontend", "UI"]
+},
+
+"Software Engineering": {
+    steps: ["DSA", "OOP", "System Design"],
+    tags: ["Coding"]
+},
+
+"Data Science": {
+    steps: ["Python", "Pandas", "Visualization"],
+    tags: ["Analytics"]
+},
+
+"Cyber Security": {
+    steps: ["Networking", "Hacking", "Tools"],
+    tags: ["Security"]
+},
+
+"App Development": {
+    steps: ["Java/Kotlin", "UI", "APIs"],
+    tags: ["Mobile"]
+},
+
+"Game Development": {
+    steps: ["Unity", "C#", "Physics"],
+    tags: ["Game"]
+},
+
+"Cloud Computing": {
+    steps: ["AWS", "Deploy", "Scaling"],
+    tags: ["Cloud"]
+},
+
+"Data Analytics": {
+    steps: ["Excel", "SQL", "BI"],
+    tags: ["Data"]
+},
+
+"Artificial Intelligence": {
+    steps: ["ML", "Deep Learning", "NLP"],
+    tags: ["AI"]
+},
+
+"DevOps": {
+    steps: ["Docker", "CI/CD", "Kubernetes"],
+    tags: ["Automation"]
+},
+
+"Networking": {
+    steps: ["IP", "Routing", "Protocols"],
+    tags: ["Network"]
+}
+
+};
+
+// LOAD
+const timeline = document.getElementById("timeline");
+const tags = document.getElementById("tags");
+
+if(data[field]){
+
+    data[field].steps.forEach((step, i)=>{
+        timeline.innerHTML += `<div class="step" style="animation-delay:${i*0.2}s">${step}</div>`;
+    });
+
+    data[field].tags.forEach(tag=>{
+        tags.innerHTML += `<span class="tag">${tag}</span>`;
+    });
+}
+
+// BUTTONS
+function openRoadmap(){
+    window.location.href = "roadmap.html?field=" + encodeURIComponent(field);
+}
+
+function startQuiz(){
+    window.location.href = "quiz.html?field=" + encodeURIComponent(field);
+}
+
+</script>
+
+</body>
+</html>
