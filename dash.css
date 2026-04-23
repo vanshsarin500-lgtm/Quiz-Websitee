@@ -117,47 +117,114 @@ body {
     transform: translateY(0);
 }
 
-/* Hero Section */
+/* HERO UPGRADE */
 .hero {
-    text-align: center;
-    padding: 70px 20px;
-    background: linear-gradient(to bottom, #eaf4fb, #d6e9f7);
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    padding: 60px 40px;
+    color: white;
 }
 
-.hero h1 {
-    font-size: 32px;
+/* FLEX LAYOUT */
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: auto;
+}
+.review-nav-btn {
+    margin-left: 15px;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 25px;
+    
+    /* 🔥 gradient like before */
+    background: linear-gradient(135deg, #ff7a18, #ff4b2b);
+    
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+
+    /* smooth look */
+    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* hover effect */
+.review-nav-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 75, 43, 0.6);
+}
+
+/* click effect */
+.review-nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* TEXT */
+.hero-text h1 {
+    font-size: 40px;
     margin-bottom: 10px;
 }
 
-.hero p {
-    color: #555;
+.hero-text p {
+    opacity: 0.9;
     margin-bottom: 20px;
 }
 
-/* Search Box */
-.search-box {
-    display: flex;
-    justify-content: center;
-    max-width: 600px;
-    margin: auto;
+/* IMAGE */
+.hero-image img {
+    width: 250px;
+    animation: float 3s ease-in-out infinite;
 }
 
-.search-box input {
+/* FLOAT ANIMATION */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* SEARCH BAR PREMIUM */
+.search-wrapper {
+    display: flex;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    width: 350px;
+}
+
+.search-wrapper input {
     flex: 1;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px 0 0 8px;
+    border: none;
     outline: none;
 }
 
-.search-box button {
-    padding: 12px 20px;
+.search-wrapper button {
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
     border: none;
-    background: #2b7bbb;
+    padding: 12px 18px;
     color: white;
-    border-radius: 0 8px 8px 0;
     cursor: pointer;
 }
+
+/* HOVER EFFECT */
+.search-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* BUTTON HOVER */
+.search-wrapper button:hover {
+    background: linear-gradient(135deg, #4338ca, #0891b2);
+}
+.search-wrapper:focus-within {
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.3);
+}
+
+
 
 .search-box button:hover {
     background: #1f5f91;
@@ -176,10 +243,9 @@ body {
 /* Grid Layout */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    max-width: 1000px;
-    margin: auto;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards in 1 row */
+    gap: 20px;
+    padding: 20px;
 }
 
 /* Card */
@@ -237,14 +303,65 @@ body {
     }
 }
 
-@media (max-width: 500px) {
-    .card-container {
-        grid-template-columns: 1fr;
-    }
 
-    .search-box {
-        flex-direction: column;
-    }
+
+/* container */
+/* 🔥 FINAL FOOTER DESIGN */
+.footer {
+    margin-top: 80px;
+    background: linear-gradient(135deg, #111827, #1f2937);
+    color: #ccc;
+    padding: 50px 20px 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+/* layout */
+.footer-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* headings */
+.footer h2,
+.footer h4 {
+    color: white;
+}
+
+/* text */
+.footer p {
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+/* links */
+.footer-links a {
+    display: block;
+    margin-bottom: 6px;
+    text-decoration: none;
+    color: #bbb;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    color: #38bdf8;
+    transform: translateX(5px);
+}
+
+/* bottom */
+.footer-bottom {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+    border-top: 1px solid #333;
+    padding-top: 12px;
+    color: #888;
+}
 
     .search-box input {
         border-radius: 8px;
@@ -254,4 +371,22 @@ body {
     .search-box button {
         border-radius: 8px;
     }
+    .suggestions {
+    position: absolute;
+    background: white;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.suggestions div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions div:hover {
+    background: #f0f0f0;
+}
 }
