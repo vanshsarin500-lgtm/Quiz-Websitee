@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Roadmap</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    background: #f5f7fa;
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(135deg, #2b7bbb, #00c6ff);
+    color: white;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* Progress */
+.progress {
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 12px;
+    width: 0%;
+    background: linear-gradient(90deg, #2b7bbb, #00c6ff);
+    transition: 0.5s;
+}
+
+/* Section */
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    color: #2b7bbb;
+    margin-bottom: 10px;
+}
+
+/* Step */
+.step {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.step a {
+    color: #2b7bbb;
+    text-decoration: none;
+}
+
+/* Back button */
+.top-bar {
+    padding: 15px;
+}
+
+.top-bar button {
+    background: #2b7bbb;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="top-bar">
+    <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<div class="hero">
+    <h1 id="title">Roadmap</h1>
+    <p>Track your learning progress 🚀</p>
+</div>
+
+<div class="container">
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div id="content"></div>
+
+</div>
+
+<script>
+
+// Get field
+const params = new URLSearchParams(window.location.search);
+const field = params.get("field") || "Machine Learning";
+
+document.getElementById("title").innerText = field + " Roadmap";
+
+// Roadmap data
+const roadmaps = {
+
+"Machine Learning": {
+    basics: [
+        ["Learn Python", "https://www.w3schools.com/python/"],
+        ["Math & Statistics", "https://www.khanacademy.org/math/statistics-probability"]
+    ],
+    intermediate: [
+        ["ML Algorithms", "https://www.coursera.org/learn/machine-learning"],
+        ["Scikit-learn", "https://scikit-learn.org/"]
+    ],
+    advanced: [
+        ["Deep Learning", "https://www.deeplearning.ai/"],
+        ["Kaggle Projects", "https://www.kaggle.com/"]
+    ]
+},
+
+"Web Development": {
+    basics: [
+        ["HTML", "https://www.w3schools.com/html/"],
+        ["CSS", "https://www.w3schools.com/css/"]
+    ],
+    intermediate: [
+        ["JavaScript", "https://www.w3schools.com/js/"],
+        ["React", "https://react.dev/"]
+    ],
+    advanced: [
+        ["Node.js", "https://nodejs.org/"],
+        ["Build Projects", "https://github.com/"]
+    ]
+},
+
+"Software Engineering": {
+    basics: [
+        ["Programming Basics", "https://www.geeksforgeeks.org/"],
+        ["Data Structures", "https://www.geeksforgeeks.org/data-structures/"]
+    ],
+    intermediate: [
+        ["OOP Concepts", "https://www.javatpoint.com/"],
+        ["System Design", "https://www.educative.io/"]
+    ],
+    advanced: [
+        ["Design Patterns", "https://refactoring.guru/"],
+        ["Large Scale Systems", "https://www.coursera.org/"]
+    ]
+},
+
+"Data Science": {
+    basics: [
+        ["Python", "https://www.w3schools.com/python/"],
+        ["Statistics", "https://www.khanacademy.org/"]
+    ],
+    intermediate: [
+        ["Pandas", "https://pandas.pydata.org/"],
+        ["Matplotlib", "https://matplotlib.org/"]
+    ],
+    advanced: [
+        ["Machine Learning", "https://scikit-learn.org/"],
+        ["Kaggle Projects", "https://www.kaggle.com/"]
+    ]
+},
+
+"Cyber Security": {
+    basics: [
+        ["Networking Basics", "https://www.netacad.com/"],
+        ["Linux", "https://linuxjourney.com/"]
+    ],
+    intermediate: [
+        ["Web Security", "https://portswigger.net/web-security"],
+        ["Ethical Hacking", "https://www.hackthebox.com/"]
+    ],
+    advanced: [
+        ["Pen Testing", "https://tryhackme.com/"],
+        ["Bug Bounty", "https://www.hackerone.com/"]
+    ]
+},
+
+"App Development": {
+    basics: [
+        ["Java/Kotlin", "https://developer.android.com/"],
+        ["UI Design Basics", "https://www.figma.com/"]
+    ],
+    intermediate: [
+        ["Android Studio", "https://developer.android.com/studio"],
+        ["API Integration", "https://rapidapi.com/"]
+    ],
+    advanced: [
+        ["Firebase", "https://firebase.google.com/"],
+        ["Publish Apps", "https://play.google.com/"]
+    ]
+},
+
+"Game Development": {
+    basics: [
+        ["C# / C++", "https://www.learncpp.com/"],
+        ["Game Logic", "https://www.gamedev.net/"]
+    ],
+    intermediate: [
+        ["Unity Engine", "https://learn.unity.com/"],
+        ["Unreal Engine", "https://www.unrealengine.com/"]
+    ],
+    advanced: [
+        ["Game Projects", "https://itch.io/"],
+        ["Multiplayer Games", "https://photonengine.com/"]
+    ]
+},
+
+"Cloud Computing": {
+    basics: [
+        ["Cloud Basics", "https://aws.amazon.com/what-is-cloud-computing/"],
+        ["Linux", "https://linuxjourney.com/"]
+    ],
+    intermediate: [
+        ["AWS / Azure", "https://aws.amazon.com/"],
+        ["Docker", "https://www.docker.com/"]
+    ],
+    advanced: [
+        ["Kubernetes", "https://kubernetes.io/"],
+        ["Cloud Projects", "https://github.com/"]
+    ]
+},
+
+"Data Analytics": {
+    basics: [
+        ["Excel", "https://www.microsoft.com/excel"],
+        ["SQL", "https://www.w3schools.com/sql/"]
+    ],
+    intermediate: [
+        ["Power BI", "https://powerbi.microsoft.com/"],
+        ["Python Analytics", "https://pandas.pydata.org/"]
+    ],
+    advanced: [
+        ["Tableau", "https://www.tableau.com/"],
+        ["Real Data Projects", "https://www.kaggle.com/"]
+    ]
+},
+
+"Artificial Intelligence": {
+    basics: [
+        ["Python", "https://www.w3schools.com/python/"],
+        ["Math for AI", "https://www.khanacademy.org/"]
+    ],
+    intermediate: [
+        ["AI Concepts", "https://www.coursera.org/"],
+        ["NLP Basics", "https://www.nltk.org/"]
+    ],
+    advanced: [
+        ["Deep Learning", "https://www.deeplearning.ai/"],
+        ["AI Projects", "https://www.kaggle.com/"]
+    ]
+},
+
+"DevOps": {
+    basics: [
+        ["Linux", "https://linuxjourney.com/"],
+        ["Git & GitHub", "https://github.com/"]
+    ],
+    intermediate: [
+        ["CI/CD (Jenkins)", "https://www.jenkins.io/"],
+        ["Docker", "https://www.docker.com/"]
+    ],
+    advanced: [
+        ["Kubernetes", "https://kubernetes.io/"],
+        ["Cloud DevOps", "https://aws.amazon.com/devops/"]
+    ]
+},
+
+"Networking": {
+    basics: [
+        ["Networking Basics", "https://www.netacad.com/"],
+        ["OSI Model", "https://www.geeksforgeeks.org/"]
+    ],
+    intermediate: [
+        ["Routing & Switching", "https://www.cisco.com/"],
+        ["Protocols", "https://www.cloudflare.com/learning/"]
+    ],
+    advanced: [
+        ["Network Security", "https://www.cisco.com/"],
+        ["CCNA Prep", "https://www.netacad.com/courses/ccna"]
+    ]
+}
+
+};
+
+// Render roadmap
+const content = document.getElementById("content");
+
+function createSection(title, items){
+    let html = `<div class="section"><h2>${title}</h2>`;
+    
+    items.forEach((step, index) => {
+        html += `
+        <div class="step">
+            <input type="checkbox" class="check" onchange="updateProgress()">
+            <div>
+                ${step[0]} <br>
+                <a href="${step[1]}" target="_blank">Learn →</a>
+            </div>
+        </div>
+        `;
+    });
+
+    html += `</div>`;
+    return html;
+}
+
+if(roadmaps[field]){
+    const data = roadmaps[field];
+
+    content.innerHTML =
+        createSection("Basics", data.basics) +
+        createSection("Intermediate", data.intermediate) +
+        createSection("Advanced", data.advanced);
+}
+
+// 🔥 UPDATE PROGRESS
+function updateProgress(){
+    const checks = document.querySelectorAll(".check");
+    const checked = document.querySelectorAll(".check:checked");
+
+    let percent = (checked.length / checks.length) * 100;
+
+    document.getElementById("progressBar").style.width = percent + "%";
+
+    // Save progress
+    localStorage.setItem("progress-" + field, JSON.stringify([...checks].map(c => c.checked)));
+}
+
+// 🔥 LOAD SAVED PROGRESS
+function loadProgress(){
+    const saved = JSON.parse(localStorage.getItem("progress-" + field));
+
+    if(saved){
+        const checks = document.querySelectorAll(".check");
+        checks.forEach((c, i) => {
+            c.checked = saved[i];
+        });
+    }
+
+    updateProgress();
+}
+
+loadProgress();
+
+// Back
+function goBack(){
+    window.history.back();
+}
+
+</script>
+
+</body>
+</html>
