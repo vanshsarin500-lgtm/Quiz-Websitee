@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamFinder Dashboard</title>
+    <link rel="stylesheet" href="dash.css">
+    
+</head>
+
+
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">💡 Quiz Master</div>
+
+        <div class="nav-right">
+            <a href="#">About</a>
+
+          <div class="profile-menu">
+    <div class="profile-icon" id="profileIcon">
+        👤
+        <span class="status-dot" id="statusDot"></span>
+    </div>
+
+    <div class="dropdown" id="dropdown">
+        <a href="login.html">Sign In</a>
+        <a href="signup.html">Sign Up</a>
+    </div>
+</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Find Your Learning Journey</h1>
+        <p>Explore roadmaps in any field</p>
+
+        <div class="search-box">
+            <input type="text" placeholder="e.g. Machine Learning, Data Science...">
+            <button>Generate Roadmap</button>
+        </div>
+    </section>
+
+    <!-- Fields Section -->
+    <section class="fields">
+        <h2>Popular Fields</h2>
+
+        <div class="card-container">
+
+            <div class="card">
+                <div class="card-content">🤖<p>Machine Learning</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Machine Learning')">Roadmap</button>
+                    <button onclick="startQuiz('Machine Learning')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">💻<p>Web Development</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Web Development')">Roadmap</button>
+                    <button onclick="startQuiz('Web Development')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">⚙️<p>Software Engineering</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Software Engineering')">Roadmap</button>
+                    <button onclick="startQuiz('Software Engineering')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">🗄️<p>Data Science</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Data Science')">Roadmap</button>
+                    <button onclick="startQuiz('Data Science')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">🔐<p>Cyber Security</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Cyber Security')">Roadmap</button>
+                    <button onclick="startQuiz('Cyber Security')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">📱<p>App Development</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('App Development')">Roadmap</button>
+                    <button onclick="startQuiz('App Development')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">🎮<p>Game Development</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Game Development')">Roadmap</button>
+                    <button onclick="startQuiz('Game Development')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">☁️<p>Cloud Computing</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Cloud Computing')">Roadmap</button>
+                    <button onclick="startQuiz('Cloud Computing')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">📊<p>Data Analytics</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Data Analytics')">Roadmap</button>
+                    <button onclick="startQuiz('Data Analytics')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">🧠<p>Artificial Intelligence</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Artificial Intelligence')">Roadmap</button>
+                    <button onclick="startQuiz('Artificial Intelligence')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">🔧<p>DevOps</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('DevOps')">Roadmap</button>
+                    <button onclick="startQuiz('DevOps')">Start Quiz</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content">🌐<p>Networking</p></div>
+                <div class="card-buttons">
+                    <button onclick="goToRoadmap('Networking')">Roadmap</button>
+                    <button onclick="startQuiz('Networking')">Start Quiz</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- JS -->
+    <script>
+function goToRoadmap(field){
+    window.location.href = "roadmap.html?field=" + encodeURIComponent(field);
+}
+
+function startQuiz(field){
+    window.open("quiz.html?field=" + encodeURIComponent(field), "_blank");
+}
+</script>
+<script>
+const user = localStorage.getItem("user");
+const statusDot = document.getElementById("statusDot");
+const dropdown = document.getElementById("dropdown");
+
+if(user){
+    // show glowing dot
+    statusDot.classList.add("active");
+
+    // update dropdown
+    dropdown.innerHTML = `
+        <a href="#">My Profile</a>
+        <a href="#" onclick="logout()">Logout</a>
+    `;
+}
+
+function logout(){
+    localStorage.removeItem("user");
+    window.location.reload();
+}
+</script>
+
+
+</body>
+</html>
