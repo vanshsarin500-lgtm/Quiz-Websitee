@@ -168,9 +168,8 @@ onAuthStateChanged(auth, (user) => {
         statusDot.style.display = "block";
 
         dropdown.innerHTML = `
-            <a href="profile.html">My Profile</a>
-            <a href="#" onclick="logout()">Logout</a>
-        `;
+    <a href="#" onclick="logout()">Logout</a>
+`;
     } else {
         statusDot.style.display = "none";
     }
