@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up - DreamFinder</title>
+    <title>Login - EduQuiz Explorer</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -10,15 +10,10 @@
 <div class="container">
     <div class="login-box">
 
-        <h2>Create Account</h2>
-        <p>Start your journey with DreamFinder</p>
+        <h2>Login</h2>
+        <p>Welcome back! Continue your journey</p>
 
-        <form id="signupForm">
-
-    <div class="input-box">
-        <input type="text" id="name" required>
-        <label>Full Name</label>
-    </div>
+        <form id="loginForm">
 
     <div class="input-box">
         <input type="email" id="email" required>
@@ -30,10 +25,10 @@
         <label>Password</label>
     </div>
 
-    <button type="submit" class="btn">Sign Up</button>
+    <button type="submit" class="btn">Login</button>
 
     <p style="margin-top:15px;">
-        Already have an account? <a href="login.html">Login</a>
+        Don't have an account? <a href="signup.html">Sign Up</a>
     </p>
 
 </form>
@@ -43,48 +38,35 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
-    sendEmailVerification,
-    updateProfile 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 🔥 PASTE YOUR FIREBASE CONFIG HERE
 const firebaseConfig = {
   apiKey: "AIzaSyCHgbiqtDlQU1IogjiZueOehovU9x-F8xk",
   authDomain: "quiz-8198a.firebaseapp.com",
   projectId: "quiz-8198a",
-  storageBucket: "quiz-8198a.firebasestorage.app",
-  messagingSenderId: "495360395071",
   appId: "1:495360395071:web:afc7c2492ddcb5bbd3758a"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-document.getElementById("signupForm").addEventListener("submit", async function(e){
-    e.preventDefault();
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+    e.preventDefault(); // 🔥 stops refresh
 
-    const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     try {
-        // ✅ Create user
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-        // ✅ Save name
-        await updateProfile(userCredential.user, {
-            displayName: name
-        });
+        if (!userCredential.user.emailVerified) {
+            alert("❌ Verify your email first!");
+            return;
+        }
 
-        // 🔥 SEND VERIFICATION EMAIL (MAIN PART)
-        await sendEmailVerification(userCredential.user);
-
-        alert("✅ Verification email sent! Check your inbox.");
-
-        // Redirect to login
-        window.location.href = "login.html";
+        alert("✅ Login successful!");
+        window.location.href = "dash.html";
 
     } catch (error) {
         alert(error.message);
